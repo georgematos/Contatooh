@@ -7,7 +7,10 @@ ao ser chamada, retorna uma instância do express: */
 var express = require('express');
 
 /* Importa o módulo de rotas */
-var home = require('../app/routes/home');
+// var home = require('../app/routes/home'); // substituido por:
+var load = require('express-load');
+
+var bodyParser = require('body-parser');
 
 /* O objeto module está disponível implicitamente
 em cada módulo, tudo que for adicionado em sua
@@ -35,7 +38,18 @@ module.exports = function() {
   /* Define o diretório onde ficarão as views */
   app.set('views', './app/views');
 
-  home(app);
+  /* Os middlewares bodyParser e method-override
+  são necessários para se fazer o uso dos métodos
+  REST delete e put em todos os navegadores */
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json());
+  app.use(require('method-override')());
+
+  // home(app); substituido por:
+  load('models', {cwd: 'app'})
+    .then('controllers')
+    .then('routes')
+    .into(app);
 
   return app;
 
