@@ -23,7 +23,7 @@ module.exports = function() {
   // Configura a variável de ambiente port para 3000
   app.set('port', 3000);
 
-  /* O Middleware static Faz com que o conteúdo da
+  /* O Middleware static faz com que o conteúdo da
   pasta public esteja acessível ao usuário através
   do navegador */
   app.use(express.static('./public'));
@@ -33,10 +33,10 @@ module.exports = function() {
   // app.use(app.router);
 
   /* Configura a view engine utilizada no app */
-  app.set('view engine', 'ejs');
+  // app.set('view engine', 'ejs');
 
   /* Define o diretório onde ficarão as views */
-  app.set('views', './app/views');
+  // app.set('views', './app/views');
 
   /* Os middlewares bodyParser e method-override
   são necessários para se fazer o uso dos métodos
